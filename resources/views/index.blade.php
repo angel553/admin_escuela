@@ -25,12 +25,14 @@
           <td>{{ $estudiante->creditos_cursados }} </td>
           <td>{{ $estudiante->correo }} </td>  
           <td><a href="/estudiante/{{$estudiante->id}}">Ver</a></td>        
-          <td><a href="/estudiante/{{$estudiante->id}}/edit">Actualizar</a></td>        
-          <td><a href="/estudiante/{{$estudiante->id}}">Eliminar</a></td>        
+          {{-- <td><a href="/estudiante/{{$estudiante->id}}/edit">Actualizar</a></td>        
+          <td><a href="/estudiante/{{$estudiante->id}}">Eliminar</a></td> --}}        
         </tr>
     @endforeach
-    <a href="estudiante/create">Agregar</a>
+    <br><br>
   </table>
+  <br>
+  <a href="estudiante/create">Agregar</a>
   <br><br>  
 
   <h2>Materias</h2>
@@ -40,19 +42,22 @@
       <th>Créditos</th>
       <th>Profesor</th>
       <th>Turno</th>
-      <th>Disponible</th>        
+      <th>Disponible</th>  
+      <th>Accion</th>      
     </tr>
-    @foreach ($estudiantes as $estudiante)
+    @foreach ($materias as $materia)
         <tr>
-          <td>{{ $estudiante->nombre }} </td>
-          <td>{{ $estudiante->codigo }} </td>
-          <td>{{ $estudiante->carrera }} </td>
-          <td>{{ $estudiante->creditos_cursados }} </td>
-          <td>{{ $estudiante->correo }} </td>          
+          <td>{{ $materia->nombre }} </td>
+          <td>{{ $materia->creditos }} </td>
+          <td>{{ $materia->profesor }} </td>
+          <td>{{ $materia->turno }} </td>
+          <td>{{ $materia->disponible }} </td>                             
+          <td><a href="/materia/{{$materia->id}}">Ver</a></td>           
         </tr>
     @endforeach
-    <a href="materia/create">Agregar</a>
   </table>
-  <br><br>
+  <br>
+  <a href="materia/create">Agregar</a>
+  <br>
 </body>
 </html>

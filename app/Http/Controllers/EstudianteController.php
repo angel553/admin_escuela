@@ -73,7 +73,8 @@ class EstudianteController extends Controller
      */
     public function show(Estudiante $estudiante)
     {
-        dd($estudiante);
+        //dd($estudiante);
+        return view('Escuela.showEstudiante', compact('estudiante'));
     }
 
     /**
@@ -84,7 +85,9 @@ class EstudianteController extends Controller
      */
     public function edit(Estudiante $estudiante)
     {
-        dd($estudiante);
+        //dd($estudiante);
+        $materias = Materia::All();
+        return view('Escuela.formEstudiante', compact('estudiante','materias'));
     }
 
     /**
@@ -96,7 +99,27 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, Estudiante $estudiante)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'max:50'],
+            'codigo' => ['required', 'min:9', 'max:9'],
+            'carrera' => ['required', 'max:50'],
+            'creditos_cursados' => ['required', 'min:0', 'max:99'],            
+            'correo' => ['required', 'email'],
+            //'materia_id' => ['required'],
+        ]);             
+        
+        $estudiante->nombre = $request->nombre;         
+        $estudiante->codigo = $request->codigo;         
+        $estudiante->carrera = $request->carrera;         
+        $estudiante->creditos_cursados = $request->creditos_cursados;         
+        $estudiante->correo = $request->correo;  
+        
+        $estudiante->save();
+
+        $estudiante->materias()->sync($request->materia_id);
+
+        //return redirect('/estudiante')->with('success','Publicación Realizada');
+        return redirect('/');
     }
 
     /**
@@ -107,7 +130,9 @@ class EstudianteController extends Controller
      */
     public function destroy(Estudiante $estudiante)
     {
-        //
+        $estudiante->delete();
+
+        return redirect('/');
     }
 
     /**

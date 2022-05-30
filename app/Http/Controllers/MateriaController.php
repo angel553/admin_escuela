@@ -59,7 +59,7 @@ class MateriaController extends Controller
 
         $materia->estudiantes()->attach($request->estudiante_id);
 
-        return redirect('/estudiante');
+        return redirect('/');
     }
 
     /**
@@ -68,9 +68,12 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function show(Materia $materia)
+    public function show($id_materia)
     {
+        $materia = Materia::find($id_materia)->get();
+        //dd($materia);
         
+        return view('escuela.showMateria', compact('materia'));
     }
 
     /**
@@ -79,9 +82,12 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function edit(Materia $materia)
+    public function edit($id_materia)
     {
-        //
+        $estudiantes = Estudiante::all();
+        //dd($estudiantes);
+        $materia = Materia::find($id_materia)->get();
+        return view('Escuela.formMateria', compact('materia','estudiantes'));
     }
 
     /**
@@ -104,6 +110,8 @@ class MateriaController extends Controller
      */
     public function destroy(Materia $materia)
     {
-        //
+        $materia->delete();
+
+        return redirect('/');
     }
 }
