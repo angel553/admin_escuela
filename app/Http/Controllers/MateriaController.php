@@ -99,7 +99,26 @@ class MateriaController extends Controller
      */
     public function update(Request $request, Materia $materia)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'max:50'],
+            'creditos' => ['required', 'min:1', 'max:99'],
+            'profesor' => ['required', 'max:50'],
+            'turno' => ['required', 'min:0', 'max:99'],            
+            'disponible' => ['required'],
+            //'estudiante_id' => ['required'],
+        ]);        
+
+        $materia->nombre = $request->nombre;         
+        $materia->creditos = $request->creditos;         
+        $materia->profesor = $request->profesor;         
+        $materia->turno = $request->turno;         
+        $materia->disponible = $request->disponible;  
+        
+        $materia->save();
+
+        $materia->estudiantes()->sync($request->estudiante_id);
+
+        return redirect('/');
     }
 
     /**

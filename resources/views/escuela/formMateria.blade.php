@@ -51,7 +51,7 @@
         <div>{{ $message }}</div>
       @enderror  
       
-    {{-- @dd($estudiantes[0]->nombre);   --}}
+      @dd($estudiantes);          
     
     <label for="materia">Estudiantes: </label>
     <select name="estudiante_id[]" multiple id="materia"> 
