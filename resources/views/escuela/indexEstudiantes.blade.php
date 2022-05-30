@@ -15,9 +15,18 @@
       <th>Carrera</th>
       <th>Créditos</th>
       <th>Correo</th>        
-    </tr>        
+    </tr>
+    @foreach ($estudiantes as $estudiante)
+        <tr>
+          <td>{{ $estudiante->nombre }} </td>
+          <td>{{ $estudiante->codigo }} </td>
+          <td>{{ $estudiante->carrera }} </td>
+          <td>{{ $estudiante->creditos_cursados }} </td>
+          <td>{{ $estudiante->correo }} </td>
+        </tr>
+    @endforeach
   </table>
   <br>  
-  <a href="escuela/create">Agregar</a>
+  <a href="estudiante/create">Agregar</a>
 </body>
 </html>

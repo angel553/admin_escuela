@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\MateriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,8 @@ Route::get('/', function () {
 
 //Route::get('/index', [EstudianteController::class, 'index']);
 
-Route::resource('/escuela', EstudianteController::class);
+Route::resource('/estudiante', EstudianteController::class);
+
+Route::resource('/materia', MateriaController::class);
+
+Route::get('/', [EstudianteController::class, 'index2']);

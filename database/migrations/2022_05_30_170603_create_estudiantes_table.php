@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->integer('codigo');
             $table->string('carrera');
-            $table->integer('creditos');
+            $table->integer('creditos_cursados');
             $table->string('correo');
             $table->timestamps();
         });

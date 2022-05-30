@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Materia;
+use App\Models\Estudiante;
 use Illuminate\Http\Request;
 
 class MateriaController extends Controller
@@ -14,7 +15,8 @@ class MateriaController extends Controller
      */
     public function index()
     {
-        //
+        $materias = Materia::all();  
+        return view('escuela.indexEstudiantes', compact('materias'));
     }
 
     /**
@@ -24,7 +26,8 @@ class MateriaController extends Controller
      */
     public function create()
     {
-        //
+        $estudiantes = Estudiante::All();
+        return view('escuela.formMateria', compact('estudiantes'));
     }
 
     /**
@@ -35,7 +38,28 @@ class MateriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'max:50'],
+            'creditos' => ['required', 'min:1', 'max:99'],
+            'profesor' => ['required', 'max:50'],
+            'turno' => ['required', 'min:0', 'max:99'],            
+            'disponible' => ['required'],
+            //'estudiante_id' => ['required'],
+        ]);
+        
+        $materia = new Materia();
+
+        $materia->nombre = $request->nombre;         
+        $materia->creditos = $request->creditos;         
+        $materia->profesor = $request->profesor;         
+        $materia->turno = $request->turno;         
+        $materia->disponible = $request->disponible;  
+        
+        $materia->save();
+
+        $materia->estudiantes()->attach($request->estudiante_id);
+
+        return redirect('/estudiante');
     }
 
     /**
@@ -46,7 +70,7 @@ class MateriaController extends Controller
      */
     public function show(Materia $materia)
     {
-        //
+        
     }
 
     /**
